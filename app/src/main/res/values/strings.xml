@@ -4,5 +4,14 @@
     <string name="app_name">Weather</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="default_text">_ _</string>
+
+    <string-array name="detail_title">
+        <item>体感温度</item>
+        <item>湿度</item>
+        <item>风向风力</item>
+        <item>紫外线指数</item>
+        <item>穿衣指数</item>
+    </string-array>
 
 </resources>

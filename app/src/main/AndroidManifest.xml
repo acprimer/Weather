@@ -18,7 +18,8 @@
             android:value="JHa5e2a95b8bd3a2caf602eb1dfcff1a90" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

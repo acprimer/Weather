@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.baoyz.widget.PullRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/refresh"
     android:layout_width="match_parent"
@@ -25,7 +25,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="Beijing"
+                    android:text="@string/default_text"
                     android:textColor="@color/text_color"
                     android:textSize="18sp" />
 
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:text="xx"
+                android:text="@string/default_text"
                 android:textSize="16sp" />
 
             <View
@@ -61,7 +61,7 @@
                 android:drawableLeft="@drawable/d00"
                 android:drawablePadding="4dp"
                 android:gravity="center"
-                android:text="晴"
+                android:text="@string/default_text"
                 android:textSize="16sp" />
 
             <TextView
@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="18"
+                android:text="@string/default_text"
                 android:textSize="12dp" />
 
             <LinearLayout
@@ -84,7 +84,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="18"
+                    android:text="@string/default_text"
                     android:textSize="48sp" />
 
                 <LinearLayout
@@ -111,13 +111,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="222" />
+                            android:text="@string/default_text" />
 
                         <TextView
                             android:id="@+id/tv_quality"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="重度污染" />
+                            android:text="@string/default_text" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -126,24 +126,71 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/wireframe_dark">
+                android:background="@drawable/wireframe_dark"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
                     android:text="预报"
-                    android:textColor="@color/dark_grey"
-                    android:layout_marginBottom="4dp"/>
+                    android:textColor="@color/dark_grey" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/dark_grey" />
+
+                <LinearLayout
+                    android:id="@+id/layout_next_fiftenn_hour"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/dark_grey" />
+
+                <LinearLayout
+                    android:id="@+id/layout_next_three_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/layout_weather_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/wireframe_dark"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="详情"
+                    android:textColor="@color/dark_grey" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
                     android:background="@color/dark_grey" />
             </LinearLayout>
-        </LinearLayout>
 
+        </LinearLayout>
 
     </ScrollView>
 
-</LinearLayout>
+</com.baoyz.widget.PullRefreshLayout>
