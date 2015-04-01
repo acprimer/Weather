@@ -23,5 +23,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.baoyz.pullrefreshlayout:library:1.0.1'
+    compile 'com.alibaba:fastjson:1.2.5'
     compile files('libs/juhe_sdk_v_2_5.jar')
 }

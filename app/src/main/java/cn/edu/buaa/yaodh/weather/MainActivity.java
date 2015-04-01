@@ -1,17 +1,25 @@
 package cn.edu.buaa.yaodh.weather;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.baoyz.widget.PullRefreshLayout;
+import com.thinkland.sdk.android.DataCallBack;
+import com.thinkland.sdk.android.JuheData;
+import com.thinkland.sdk.android.Parameters;
 
+import cn.edu.buaa.yaodh.weather.entity.Weather;
 
 public class MainActivity extends Activity {
+    private Context mContext;
     private PullRefreshLayout refreshLayout;
+    private TextView tvCity;
     private LinearLayout layoutHours;
     private LinearLayout layoutDays;
     private LinearLayout layoutDetail;
@@ -23,8 +31,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+        mContext = this;
 
         refreshLayout = (PullRefreshLayout) findViewById(R.id.refresh);
         refreshLayout.setRefreshStyle(PullRefreshLayout.STYLE_MATERIAL);
@@ -36,13 +43,33 @@ public class MainActivity extends Activity {
         });
         refreshLayout.setRefreshing(false);
         initViews();
+
+        getData();
+    }
+
+    private void getData() {
+        Parameters params = new Parameters();
+        params.add("ip", "www.juhe.cn");
+        params.add("dtype", "xml");
+        JuheData.executeWithAPI(39, "http://v.juhe.cn/weather/index", JuheData.GET, params, new DataCallBack() {
+            @Override
+            public void resultLoaded(int err, String reason, String result) {
+                if(err == 0) {
+                    tvCity.setText(result);
+                } else {
+                    Toast.makeText(mContext, reason, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
     public void initViews() {
+        tvCity = (TextView) findViewById(R.id.tv_city);
         layoutHours = (LinearLayout) findViewById(R.id.layout_next_fiftenn_hour);
         layoutDays = (LinearLayout) findViewById(R.id.layout_next_three_day);
         layoutDetail = (LinearLayout) findViewById(R.id.layout_weather_detail);
-        LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
+        LayoutInflater inflater = LayoutInflater.from(mContext);
         nextHourLayouts = new LinearLayout[5];
         for (int i = 0; i < 5; i++) {
             nextHourLayouts[i] = (LinearLayout) inflater.inflate(R.layout.layout_next_hour, layoutHours, false);
