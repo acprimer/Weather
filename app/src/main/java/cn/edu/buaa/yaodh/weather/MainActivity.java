@@ -3,6 +3,7 @@ package cn.edu.buaa.yaodh.weather;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,6 +14,9 @@ import com.baoyz.widget.PullRefreshLayout;
 import com.thinkland.sdk.android.DataCallBack;
 import com.thinkland.sdk.android.JuheData;
 import com.thinkland.sdk.android.Parameters;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import cn.edu.buaa.yaodh.weather.entity.Weather;
 
@@ -26,6 +30,7 @@ public class MainActivity extends Activity {
     private LinearLayout[] nextHourLayouts;
     private LinearLayout[] nextDayLayouts;
     private LinearLayout[] detailLayouts;
+    private Weather weather;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +54,22 @@ public class MainActivity extends Activity {
 
     private void getData() {
         Parameters params = new Parameters();
-        params.add("ip", "www.juhe.cn");
-        params.add("dtype", "xml");
-        JuheData.executeWithAPI(39, "http://v.juhe.cn/weather/index", JuheData.GET, params, new DataCallBack() {
+        params.add("ip", Constant.JUHE_IP);
+        params.add("dtype", "json");
+        params.add("cityname", Constant.DEFAULT_CITY);
+        JuheData.executeWithAPI(Constant.WEATHER_ID, Constant.WEATHER_URL, JuheData.GET, params, new DataCallBack() {
             @Override
             public void resultLoaded(int err, String reason, String result) {
-                if(err == 0) {
-                    tvCity.setText(result);
+                if (err == 0) {
+                    Log.d("weather", result);
+                    try {
+                        JSONObject obj = new JSONObject(result);
+                        Log.d("weather", obj.getJSONObject("result").getJSONObject("today").toString());
+                        weather = JSON.parseObject(obj.getJSONObject("result").getJSONObject("today").toString(), Weather.class);
+                        updateViews();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     Toast.makeText(mContext, reason, Toast.LENGTH_SHORT).show();
                 }
@@ -87,5 +101,10 @@ public class MainActivity extends Activity {
             layoutDetail.addView(detailLayouts[i]);
             ((TextView) detailLayouts[i].findViewById(R.id.tv_desc)).setText(detailTitles[i]);
         }
+    }
+
+    private void updateViews() {
+        tvCity.setText(weather.getCity());
+        ((TextView) detailLayouts[4].findViewById(R.id.tv_content)).setText(weather.getDressingIndex());
     }
 }

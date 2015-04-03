@@ -1,18 +1,26 @@
 package cn.edu.buaa.yaodh.weather.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 /**
  * Created by yaodh on 2015/4/1.
  */
 public class Weather {
+    @JSONField(name="city")
     private String city;
     private String release;
+    @JSONField(name="weather")
     private String weatherId;
+    @JSONField(name="temperature")
     private String temp;
     private String nowTemp;
     private String feltTemp;
     private String humidity;
+    @JSONField(name="wind")
     private String wind;
+    @JSONField(name="uv_index")
     private String uvIndex;
+    @JSONField(name="dressing_index")
     private String dressingIndex;
 
     public String getCity() {
